@@ -4,6 +4,7 @@ import viteLogo from '/vite.svg'
 import './App.css'
 import { Header } from './components/Header'
 import { ListaSuper } from './components/ListaSuper'
+import { Login } from './components/Login'
 
 const PRODUCTOS = [
   { nombre: "manzana", precio: 5 },
@@ -20,30 +21,42 @@ const PRODUCTOS = [
 
 function App() {
   const [count, setCount] = useState(0)
+  const [lista_super, setListaSuper] = useState(false)
+  const [sesion, setSesion] = useState(false)
 
   return (
     <>
+    <Header title = {"Mi primer componente =D"} color = {'#8A6642'}/>
+    {sesion ?
       <div>
-        <Header title = {"Mi primer componente =D"} color = {'pink'}/>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <ListaSuper productos = {PRODUCTOS}/>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
+        <div>
+          <a href="https://vitejs.dev" target="_blank">
+            <img src={viteLogo} className="logo" alt="Vite logo" />
+          </a>
+          <a href="https://react.dev" target="_blank">
+            <img src={reactLogo} className="logo react" alt="React logo" />
+          </a>
+        </div>
+        <button onClick = {() => setListaSuper(!lista_super)}>
+          {lista_super ? 'Ocultar lista' : 'Mostrar lista'}
         </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
+        {lista_super === true ? 
+          <ListaSuper productos = {PRODUCTOS}/>
+          : <p>:P</p>
+        }
+        <div className="card">
+          <button onClick={() => setCount((count) => count + 1)}>
+            count is {count}
+          </button>
+        </div>
+        <button onClick = {() => setSesion(false)}>Cerrar sesión</button>
       </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+    : 
+      <div>
+        <button onClick = {() => setSesion(true)}>Iniciar sesión</button>
+        <Login />
+      </div>
+    }
     </>
   )
 }
