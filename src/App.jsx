@@ -53,8 +53,7 @@ function App() {
       </div>
     : 
       <div>
-        <button onClick = {() => setSesion(true)}>Iniciar sesión</button>
-        <Login />
+        <Login setSesion = {setSesion}/>
       </div>
     }
     </>

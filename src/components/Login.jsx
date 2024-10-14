@@ -6,7 +6,7 @@ const USER_CREDENTIALS = {
     password: 'admin'
 }
 
-export const Login = () => {
+export const Login = ({ setSesion }) => {
     const [username, setUsername] = useState('')
     const [password, setPassword] = useState('')
     const [error, setError] = useState('')
@@ -14,12 +14,11 @@ export const Login = () => {
     const handleSubmit = (e) => {
         e.preventDefault()
         if (username === USER_CREDENTIALS.username && password === USER_CREDENTIALS.password) {
-            alert("Inicio de sesión exitoso")
+            setSesion(true)
             setUsername('')
             setPassword('')
             setError('')
         } else {
-            alert("Usuario o contraseña incorrecto")
             setUsername('')
             setPassword('')
             setError('Usuario o contraseña incorrectos')
